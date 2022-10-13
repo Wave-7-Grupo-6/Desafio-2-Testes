@@ -25,4 +25,9 @@ public class BairroController {
     public ResponseEntity<List<BairroDTO>> getTodos(){
         return new ResponseEntity<>(bairroService.getTodos(), HttpStatus.OK);
     }
+
+    @GetMapping("/pelo_id/{id}")
+    public ResponseEntity<BairroDTO> getBairroPeloId(@PathVariable int id){
+        return new ResponseEntity<>(bairroService.getBairroPeloId(id), HttpStatus.OK);
+    }
 }

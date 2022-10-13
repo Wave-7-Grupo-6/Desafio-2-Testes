@@ -24,4 +24,9 @@ public class BairroService implements IBairro{
     public List<BairroDTO> salvarBairro(List<Bairro> bairros) {
         return repo.salvarBairro(bairros).get().stream().map(BairroDTO::new).collect(Collectors.toList());
     }
+
+    @Override
+    public BairroDTO getBairroPeloId(int id) {
+        return new BairroDTO(repo.getBairroPeloId(id).get());
+    }
 }

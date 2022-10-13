@@ -1,12 +1,9 @@
 package com.example.desafio02.dto;
 
 import com.example.desafio02.model.Bairro;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.List;
 
 @Getter
 @Setter

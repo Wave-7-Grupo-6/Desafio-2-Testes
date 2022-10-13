@@ -48,6 +48,10 @@ public class BairroRepo {
         return Optional.empty();
     }
 
+    public Optional<Bairro> getBairroPeloId(int id){
+        return Optional.of(getTodos().get(id - 1));
+    }
+
     public boolean bairroExistente(Bairro bairro){
         return getTodos().contains(bairro);
     }
