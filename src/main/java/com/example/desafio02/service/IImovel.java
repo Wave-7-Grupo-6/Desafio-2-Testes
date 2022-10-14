@@ -18,4 +18,6 @@ public interface IImovel {
    List<ComodoDTO> getImovelComodosArea(int id);
 
     BigDecimal getValorImovel(int id);
+
+    String getMaiorComodo(int id);
 }

@@ -46,4 +46,9 @@ public class ImovelController {
     public ResponseEntity<BigDecimal> getValorImovel(@PathVariable int id){
         return new ResponseEntity<>(imovelService.getValorImovel(id), HttpStatus.OK);
     }
+
+    @GetMapping("/maior_comodo/{id}")
+    public ResponseEntity<String> getMaiorComodo(@PathVariable int id){
+        return new ResponseEntity<>(imovelService.getMaiorComodo(id), HttpStatus.OK);
+    }
 }
