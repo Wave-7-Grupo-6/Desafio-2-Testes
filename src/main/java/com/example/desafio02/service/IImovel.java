@@ -7,4 +7,5 @@ import java.util.List;
 public interface IImovel {
     Imovel salvarImovel(Imovel imovel);
     List<Imovel> getTodos();
+    Imovel getImovelPeloId(int id);
 }

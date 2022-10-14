@@ -24,4 +24,9 @@ public class ImovelController {
     public ResponseEntity<List<Imovel>> getTodos(){
         return new ResponseEntity<>(imovelService.getTodos(), HttpStatus.OK);
     }
+
+    @GetMapping("/pelo_id/{id}")
+    public ResponseEntity<Imovel> getImovelPeloId(@PathVariable int id){
+        return new ResponseEntity<>(imovelService.getImovelPeloId(id), HttpStatus.OK);
+    }
 }
