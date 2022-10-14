@@ -52,8 +52,8 @@ public class BairroRepo {
     }
 
     public Optional<Bairro> getBairroPeloId(int id){
-        if(getTodos().size() <= id) throw new NotFoundException("Bairro não encontrado");
-        System.out.println("id do get bairro pelo id " + id);
+        if(getTodos().size() < id || id == 0) throw new NotFoundException("Bairro não encontrado");
+
         return Optional.of(getTodos().get(id - 1));
     }
 
@@ -83,5 +83,9 @@ public class BairroRepo {
 
     public int generateId(){
         return getTodos().size() + 1;
+    }
+
+    public boolean bairroExistente(int idBairro){
+        return getBairroPeloId(idBairro).isPresent();
     }
 }
