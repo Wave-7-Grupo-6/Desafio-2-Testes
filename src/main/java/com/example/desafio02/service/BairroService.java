@@ -1,6 +1,7 @@
 package com.example.desafio02.service;
 
 import com.example.desafio02.dto.BairroDTO;
+import com.example.desafio02.exception.NotFoundException;
 import com.example.desafio02.model.Bairro;
 import com.example.desafio02.repository.BairroRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,10 @@ public class BairroService implements IBairro{
 
     @Override
     public BairroDTO getBairroPeloId(int id) {
-        return new BairroDTO(repo.getBairroPeloId(id).get());
+        Optional<Bairro> bairro = repo.getBairroPeloId(id);
+        if(bairro.isEmpty()){
+            throw new NotFoundException("O bairro não existe.");
+        }
+        return new BairroDTO(bairro.get());
     }
 }
