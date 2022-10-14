@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -13,9 +15,11 @@ import lombok.Setter;
 public class BairroDTO {
     private int id;
     private String nome;
+    private BigDecimal valorMetro;
 
     public BairroDTO(Bairro bairro) {
         this.id = bairro.getId();
         this.nome = bairro.getNome();
+        this.valorMetro = bairro.getValorMetro();
     }
 }

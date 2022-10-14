@@ -3,9 +3,14 @@ package com.example.desafio02.dto;
 import com.example.desafio02.model.Comodo;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 public class ComodoDTO {
     String nome;
+    Double comprimento;
+    Double largura;
     Double comodoArea;
 
     public ComodoDTO(Comodo comodo){

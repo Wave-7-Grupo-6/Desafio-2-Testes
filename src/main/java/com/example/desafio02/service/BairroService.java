@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class BairroService implements IBairro{
-    @Autowired
-    private BairroRepo repo;
+
+    private static BairroRepo repo = new BairroRepo();
 
     @Override
     public List<BairroDTO> getTodos() {

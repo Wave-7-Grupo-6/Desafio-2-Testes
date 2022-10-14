@@ -1,6 +1,7 @@
 package com.example.desafio02.model;
 
 import lombok.AllArgsConstructor;
+import com.example.desafio02.dto.ComodoDTO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,6 +9,8 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -25,4 +28,9 @@ public class Comodo {
     @NotBlank(message = "O comprimento do cômodo não pode estar vazio!")
     @Max( value = 33, message = "O comprimento máximo permitida por cômodo é de 33 metros!")
     private Double comprimento;
+
+    public Double getComodoArea(){
+        return this.largura * this.comprimento;
+    }
+
 }
