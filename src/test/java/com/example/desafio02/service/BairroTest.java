@@ -25,8 +25,8 @@ class BairroTest {
     private BairroRepo repo;
 
     @Test
-    @DisplayName("Valida se bairro entrada existe existe no repositorio")
-    void novoBairro_retornaBairroIncompativel_quandoErro() {
+    @DisplayName("Valida se bairro retorna corretamente")
+    void novoBairro_retornaBairroCorretamente_quandoSucesso() {
         BigDecimal valorMetro = new BigDecimal("10.00");
 
         Bairro bairro = new Bairro(1, "Bairro", valorMetro);
