@@ -59,7 +59,7 @@ class BairroControllerTest {
     void salvarBairros_ThrowsException_quandoArgumentosNaoAtendemCriterios(String nome, BigDecimal valorMetro) throws Exception {
         List<Bairro> bairros = Arrays.asList(new Bairro(1, nome, valorMetro));
 
-        List<BairroDTO> bairrosDTO = Arrays.asList(new BairroDTO(1, nome));
+        List<BairroDTO> bairrosDTO = Arrays.asList(new BairroDTO(1, nome, valorMetro));
         when(service.salvarBairro(anyList())).thenReturn(bairrosDTO);
 
         mockMvc.perform(

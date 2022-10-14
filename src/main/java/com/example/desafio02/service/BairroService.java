@@ -14,7 +14,8 @@ import java.util.stream.Collectors;
 @Service
 public class BairroService implements IBairro{
 
-    private static BairroRepo repo = new BairroRepo();
+    @Autowired
+    private BairroRepo repo;
 
     @Override
     public List<BairroDTO> getTodos() {

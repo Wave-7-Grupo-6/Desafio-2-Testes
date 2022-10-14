@@ -19,6 +19,7 @@ import java.util.List;
 
 import static com.example.desafio02.utils.TestUtils.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -48,7 +49,17 @@ class ImovelControllerTest {
     }
 
     @Test
-    void getImovelArea() {
+    void getImovelArea_returnArea_quandoSucesso() throws Exception {
+        Imovel imovel = novoImovel();
+
+        when(service.getImovelArea(anyInt())).thenReturn("45,00");
+
+        mockMvc.perform(
+                        get("/imoveis/area/{id}", imovel.getId())
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", CoreMatchers.is("45,00")));
     }
 
     @Test
