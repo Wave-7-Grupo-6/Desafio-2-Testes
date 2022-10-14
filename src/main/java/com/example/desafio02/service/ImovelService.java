@@ -9,7 +9,9 @@ import com.example.desafio02.repository.ImovelRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class ImovelService implements IImovel{
@@ -36,15 +38,15 @@ public class ImovelService implements IImovel{
         return imovel.areaTotal();
     }
 
-//    public List<ComodoDTO> getImovelComodosArea(int id){
-//        Imovel imovel = getImovelPeloId(id);
-//        return imovel.getComodoArea();
-//    }
+    public List<ComodoDTO> getImovelComodosArea(int id){
+        Imovel imovel = getImovelPeloId(id);
+        return imovel.getComodos().stream().map(ComodoDTO::new).collect(Collectors.toList());
+    }
 
-    public Double getValorImovel(int id){
+    public BigDecimal getValorImovel(int id){
         Imovel imovel = getImovelPeloId(id);
         BairroService bairro = new BairroService();
         BairroDTO bairroPorId = bairro.getBairroPeloId(imovel.getIdBairro());
-        return imovel.areaTotal() * bairroPorId.getValorMetro().doubleValue();
+        return bairroPorId.getValorMetro().multiply(BigDecimal.valueOf(imovel.areaTotal()));
     }
 }

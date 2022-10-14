@@ -40,10 +40,4 @@ public class Imovel {
         return areaTotal;
     }
 
-//    public List<ComodoDTO> getComodoArea(){
-//        List<ComodoDTO> listaComodos = new ArrayList<ComodoDTO>();
-//        for(Comodo comodo: comodos) listaComodos.add(new ComodoDTO(comodo));
-//        return listaComodos;
-//    }
-
 }

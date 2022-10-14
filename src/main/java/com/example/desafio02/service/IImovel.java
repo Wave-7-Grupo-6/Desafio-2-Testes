@@ -5,6 +5,7 @@ import com.example.desafio02.exception.AlreadyExistingException;
 import com.example.desafio02.exception.NotFoundException;
 import com.example.desafio02.model.Imovel;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface IImovel {
@@ -14,7 +15,7 @@ public interface IImovel {
 
     Double getImovelArea(int id);
 
-   // List<ComodoDTO> getImovelComodosArea(int id);
+   List<ComodoDTO> getImovelComodosArea(int id);
 
-    Double getValorImovel(int id);
+    BigDecimal getValorImovel(int id);
 }
