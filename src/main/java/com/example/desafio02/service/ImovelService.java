@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,9 +35,9 @@ public class ImovelService implements IImovel{
         return repo.getImovelPeloId(id).get();
     }
 
-    public Double getImovelArea(int id){
+    public String getImovelArea(int id){
         Imovel imovel = getImovelPeloId(id);
-        return imovel.areaTotal();
+        return new DecimalFormat("#,##0.00").format(imovel.areaTotal());
     }
 
     public List<ComodoDTO> getImovelComodosArea(int id){
@@ -47,6 +49,6 @@ public class ImovelService implements IImovel{
         Imovel imovel = getImovelPeloId(id);
         BairroService bairro = new BairroService();
         BairroDTO bairroPorId = bairro.getBairroPeloId(imovel.getIdBairro());
-        return bairroPorId.getValorMetro().multiply(BigDecimal.valueOf(imovel.areaTotal()));
+        return bairroPorId.getValorMetro().multiply(BigDecimal.valueOf(imovel.areaTotal())).setScale(2, RoundingMode.HALF_EVEN);
     }
 }

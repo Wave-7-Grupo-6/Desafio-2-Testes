@@ -25,12 +25,6 @@ public class Comodo {
     @Max( value = 33, message = "O comprimento máximo permitida por cômodo é de 33 metros!")
     private Double comprimento;
 
-//    public List<ComodoDTO> getComodoArea(){
-//        List<ComodoDTO> listaComodos = new ArrayList<ComodoDTO>();
-//        for(Comodo comodo: comodos) listaComodos.add(new ComodoDTO(comodo));
-//        return listaComodos;
-//    }
-
     public Double getComodoArea(){
         return this.largura * this.comprimento;
     }
