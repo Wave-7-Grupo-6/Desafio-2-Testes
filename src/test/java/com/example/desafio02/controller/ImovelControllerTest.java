@@ -9,11 +9,13 @@ import com.example.desafio02.service.ImovelService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.Test;
+import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,9 +23,11 @@ import java.util.List;
 
 import static com.example.desafio02.utils.TestUtils.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -39,7 +43,17 @@ class ImovelControllerTest {
     private ImovelService service;
 
     @Test
-    void salvarImovel() {
+    void salvarImovel() throws Exception {
+        Imovel imovel = novoImovel();
+        BDDMockito.when(service.salvarImovel(any())).thenReturn(imovel);
+
+        ResultActions resposta = mockMvc.perform(post("/imoveis/salvar", imovel)
+                .content(mapper.writeValueAsString(imovel))
+                .contentType(MediaType.APPLICATION_JSON));
+
+        resposta.andExpect(status().isCreated())
+                .andExpect(jsonPath("$.nome", CoreMatchers.is(imovel.getNome())))
+                .andExpect(jsonPath("$.idBairro", CoreMatchers.is(imovel.getIdBairro())));
     }
 
     @Test
