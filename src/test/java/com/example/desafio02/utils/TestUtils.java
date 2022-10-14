@@ -18,6 +18,9 @@ public class TestUtils {
         return new Bairro(1, "Bairro 1", new BigDecimal(25));
     }
 
+    public static Comodo novoComodo(){
+        return  new Comodo("sala", 5.0, 5.0);
+    }
     public static List<Comodo> novaListaComodos(){
         return Arrays.asList(
                 new Comodo("sala", 5.0, 5.0),

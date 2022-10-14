@@ -7,6 +7,7 @@ import com.example.desafio02.repository.BairroRepo;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -36,7 +37,7 @@ class BairroServiceTest {
     void getTodos_returnListaBairros_quandoSucesso() {
         Bairro bairro = novoBairro();
         List<Bairro> bairros = Arrays.asList(bairro);
-        when(repo.getTodos()).thenReturn(bairros);
+        BDDMockito.when(repo.getTodos()).thenReturn(bairros);
 
         assertThat(service.getTodos()).isNotEmpty();
         assertThat(service.getTodos().get(0).getNome()).isEqualTo(bairro.getNome());
@@ -65,7 +66,6 @@ class BairroServiceTest {
     @Test
     void getBairroPeloId_throwsNotFoundException_quandoBairroNaoExiste() {
         Integer bairroId = 1;
-        Bairro bairro = novoBairro();
         when(repo.getBairroPeloId(anyInt())).thenThrow(NotFoundException.class);
 
         assertThrows(NotFoundException.class, ()-> service.getBairroPeloId(bairroId));
