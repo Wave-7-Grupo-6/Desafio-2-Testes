@@ -60,4 +60,13 @@ class ImovelServiceTest {
         assertThat(comodoDTOS.get(0).getNome()).isEqualTo(imovel.getComodos().get(0).getNome());
         assertThat(comodoDTOS.get(0).getComodoArea()).isEqualTo(areaComodo1);
     }
+
+    @Test
+    void getMaiorComodo_returnNomeComodo_quandoSucesso(){
+        Imovel imovel = novoImovel();
+
+        when(repo.getImovelPeloId(imovel.getId())).thenReturn(Optional.of(imovel));
+
+        assertThat(service.getMaiorComodo(imovel.getId())).isEqualTo("sala");
+    }
 }
