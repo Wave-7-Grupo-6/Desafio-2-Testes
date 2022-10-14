@@ -2,6 +2,7 @@ package com.example.desafio02.service;
 
 import com.example.desafio02.dto.BairroDTO;
 import com.example.desafio02.exception.AlreadyExistingException;
+import com.example.desafio02.exception.NotFoundException;
 import com.example.desafio02.model.Bairro;
 import com.example.desafio02.repository.BairroRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class BairroService implements IBairro{
     }
 
     @Override
-    public BairroDTO getBairroPeloId(int id) {
+    public BairroDTO getBairroPeloId(int id) throws NotFoundException {
         return new BairroDTO(repo.getBairroPeloId(id).get());
     }
 }

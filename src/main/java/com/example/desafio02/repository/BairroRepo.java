@@ -1,6 +1,7 @@
 package com.example.desafio02.repository;
 
 import com.example.desafio02.exception.AlreadyExistingException;
+import com.example.desafio02.exception.NotFoundException;
 import com.example.desafio02.model.Bairro;
 import com.example.desafio02.util.NumberGenerator;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
@@ -50,6 +51,8 @@ public class BairroRepo {
     }
 
     public Optional<Bairro> getBairroPeloId(int id){
+        if(getTodos().size() < id) throw new NotFoundException("Bairro não encontrado");
+
         return Optional.of(getTodos().get(id - 1));
     }
 
