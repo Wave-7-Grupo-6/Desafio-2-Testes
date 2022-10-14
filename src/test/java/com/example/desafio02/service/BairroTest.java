@@ -1,41 +1,50 @@
 package com.example.desafio02.service;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.example.desafio02.dto.BairroDTO;
+import com.example.desafio02.model.Bairro;
+import com.example.desafio02.repository.BairroRepo;
+
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
+
+import java.math.*;
+import java.util.*;
 
 @ExtendWith(MockitoExtension.class)
 class BairroTest {
 
     @InjectMocks
-    private BairroService bairroService;
+    private BairroService service;
 
     @Mock
-    private ContaDAO dao;
-
-    private Bairro bairro;
-
-    @BeforeEach
-    void setup() {
-        bairro = new Bairro();
-    }
+    private BairroRepo repo;
 
     @Test
     @DisplayName("Valida se bairro entrada existe existe no repositorio")
     void novoBairro_retornaBairroIncompativel_quandoErro() {
-        Mockito.when(dao.novoBairro(ArgumentMatchers.anyString()))
-                .thenReturn(bairro);
+        BigDecimal valorMetro = new BigDecimal("10.00");
 
-        Bairro bairro = service.novoBairro(bairro.getNome());
+        Bairro bairro = new Bairro(1, "Bairro", valorMetro);
+        Bairro bairro2 = new Bairro(2, "Bairro", valorMetro);
 
-        assertThat(bairro).isNotNull();
+        List<Bairro> bairros = new ArrayList<>() {{
+            add(bairro);
+            add(bairro2);
+        }};
+
+        Mockito.when(repo.salvarBairro(bairros)).thenReturn(Optional.of(bairros));
+
+        List<Bairro> bairroEntrada = new ArrayList<>() {{
+            add(bairro);
+        }};
+
+        List<BairroDTO> salvarBairro = service.salvarBairro(bairros);
+
+        assertThat(salvarBairro).isNotNull();
     }
 }

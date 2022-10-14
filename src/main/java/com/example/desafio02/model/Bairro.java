@@ -8,6 +8,8 @@ import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Bairro {
     private int id;
 
