@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class ImovelService implements IImovel{
@@ -37,6 +38,6 @@ public class ImovelService implements IImovel{
 
     public List<ComodoDTO> getImovelComodosArea(int id){
         Imovel imovel = getImovelPeloId(id);
-        return imovel.getComodoArea();
+        return imovel.getComodos().stream().map(ComodoDTO::new).collect(Collectors.toList());
     }
 }
