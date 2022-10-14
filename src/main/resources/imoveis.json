@@ -7,4 +7,13 @@
     "comprimento" : 20.4
   } ],
   "idBairro" : 1
+}, {
+  "id" : 2,
+  "nome" : "Cajamar 2",
+  "comodos" : [ {
+    "nome" : "cozinha",
+    "largura" : 24.5,
+    "comprimento" : 20.4
+  } ],
+  "idBairro" : 1
 } ]
