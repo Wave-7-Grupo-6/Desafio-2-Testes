@@ -24,16 +24,4 @@ class ImovelTest {
     void areaTotal_returnValorTotal_quandoSucesso() {
     }
 
-    @Test
-    void getComodoArea_returnListComodosDTOcomArea_quandoSucesso() {
-        List<ComodoDTO> comodoList = imovel.getComodoArea();
-
-        double areaComodo1 = imovel.getComodos().get(0).getComprimento() * imovel.getComodos().get(0).getLargura();
-        double areaComodo2 = imovel.getComodos().get(1).getComprimento() * imovel.getComodos().get(1).getLargura();
-
-        assertThat(comodoList.get(0).getComodoArea()).isEqualTo(areaComodo1);
-        assertThat(comodoList.get(0).getNome()).isEqualTo(imovel.getComodos().get(0).getNome());
-        assertThat(comodoList.get(1).getComodoArea()).isEqualTo(areaComodo2);
-        assertThat(comodoList.get(1).getNome()).isEqualTo(imovel.getComodos().get(1).getNome());
-    }
 }
