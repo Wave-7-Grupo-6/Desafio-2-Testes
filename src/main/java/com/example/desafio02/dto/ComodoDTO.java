@@ -9,6 +9,8 @@ import java.util.List;
 @Data
 public class ComodoDTO {
     String nome;
+    Double comprimento;
+    Double largura;
     Double comodoArea;
 
     public ComodoDTO(Comodo comodo){

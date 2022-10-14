@@ -25,11 +25,11 @@ public class Imovel {
     @Min(value = 1, message = "O id do bairro não pode ser menor que 1")
     private int idBairro;
 
-    public void adicionarNovoComodo(Comodo comodo){
-        if (comodos == null) comodos = new ArrayList<>();
-
-        comodos.add(comodo);
-    }
+//    public void adicionarNovoComodo(Comodo comodo){
+//        if (comodos == null) comodos = new ArrayList<>();
+//
+//        comodos.add(comodo);
+//    }
 
     public double areaTotal(){
         double areaTotal = 0;

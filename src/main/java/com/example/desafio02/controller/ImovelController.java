@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -39,5 +40,10 @@ public class ImovelController {
     @GetMapping("/area_comodos/{id}")
     public ResponseEntity<List<ComodoDTO>> getImovelComodosArea(@PathVariable int id){
         return new ResponseEntity<>(imovelService.getImovelComodosArea(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/valor_imovel/{id}")
+    public ResponseEntity<BigDecimal> getValorImovel(@PathVariable int id){
+        return new ResponseEntity<>(imovelService.getValorImovel(id), HttpStatus.OK);
     }
 }
