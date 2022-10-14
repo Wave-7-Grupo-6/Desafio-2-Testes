@@ -1,5 +1,6 @@
 package com.example.desafio02.service;
 
+import com.example.desafio02.dto.BairroDTO;
 import com.example.desafio02.dto.ComodoDTO;
 import com.example.desafio02.exception.AlreadyExistingException;
 import com.example.desafio02.exception.NotFoundException;
@@ -8,7 +9,9 @@ import com.example.desafio02.repository.ImovelRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class ImovelService implements IImovel{
@@ -37,6 +40,13 @@ public class ImovelService implements IImovel{
 
     public List<ComodoDTO> getImovelComodosArea(int id){
         Imovel imovel = getImovelPeloId(id);
-        return imovel.getComodoArea();
+        return imovel.getComodos().stream().map(ComodoDTO::new).collect(Collectors.toList());
+    }
+
+    public BigDecimal getValorImovel(int id){
+        Imovel imovel = getImovelPeloId(id);
+        BairroService bairro = new BairroService();
+        BairroDTO bairroPorId = bairro.getBairroPeloId(imovel.getIdBairro());
+        return bairroPorId.getValorMetro().multiply(BigDecimal.valueOf(imovel.areaTotal()));
     }
 }
