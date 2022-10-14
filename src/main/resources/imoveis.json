@@ -1,1 +1,10 @@
-[]
+[ {
+  "id" : 1,
+  "nome" : "Cajamar",
+  "comodos" : [ {
+    "nome" : "cozinha",
+    "largura" : 24.5,
+    "comprimento" : 20.4
+  } ],
+  "idBairro" : 1
+} ]
