@@ -16,6 +16,7 @@ import java.util.Optional;
 import static com.example.desafio02.utils.TestUtils.novoImovel;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -39,7 +40,11 @@ class ImovelServiceTest {
     }
 
     @Test
-    void getImovelArea() {
+    void getImovelArea_returnArea_quandoSucesso() {
+        Imovel imovel = novoImovel();
+        when(repo.getImovelPeloId(anyInt())).thenReturn(Optional.of(imovel));
+
+        assertThat(service.getImovelArea(imovel.getId())).isEqualTo("45,00");
     }
 
     @Test
