@@ -1,5 +1,6 @@
 package com.example.desafio02.controller;
 
+import com.example.desafio02.dto.ComodoDTO;
 import com.example.desafio02.model.Imovel;
 import com.example.desafio02.service.IImovel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,20 @@ public class ImovelController {
     @GetMapping
     public ResponseEntity<List<Imovel>> getTodos(){
         return new ResponseEntity<>(imovelService.getTodos(), HttpStatus.OK);
+    }
+
+    @GetMapping("/pelo_id/{id}")
+    public ResponseEntity<Imovel> getImovelPeloId(@PathVariable int id){
+        return new ResponseEntity<>(imovelService.getImovelPeloId(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/area/{id}")
+    public ResponseEntity<Double> getImovelArea(@PathVariable int id){
+        return new ResponseEntity<>(imovelService.getImovelArea(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/area_comodos/{id}")
+    public ResponseEntity<List<ComodoDTO>> getImovelComodosArea(@PathVariable int id){
+        return new ResponseEntity<>(imovelService.getImovelComodosArea(id), HttpStatus.OK);
     }
 }
