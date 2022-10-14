@@ -1,5 +1,8 @@
 package com.example.desafio02.repository;
 
+import com.example.desafio02.exception.AlreadyExistingException;
+import com.example.desafio02.exception.NotFoundException;
+import com.example.desafio02.model.Bairro;
 import com.example.desafio02.model.Imovel;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,7 +24,11 @@ public class ImovelRepo {
         List<Imovel> imoveis = new ArrayList<>(getTodos());
         ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
 
-        imoveis.add(novoImovel);
+        if(!bairroExiste(novoImovel.getIdBairro())) throw new NotFoundException("Bairro não encontrado");
+        if(!imovelExistente(novoImovel)) {
+            novoImovel.setId(generateId());
+            imoveis.add(novoImovel);
+        }
 
         try{
             writer.writeValue(new File(linkFile), imoveis);
@@ -42,5 +49,49 @@ public class ImovelRepo {
         }
 
         return null;
+    }
+
+    public Optional<Imovel> getImovelPeloId(int id){
+        List<Imovel> imoveis = new ArrayList<>(getTodos());
+
+        for (Imovel imovel : imoveis) {
+            if(imovel.getId() == id) return Optional.of(imovel);
+        }
+
+        return Optional.empty();
+    }
+
+    public boolean imovelExistente(Imovel imovel){
+        return idJaCadastrado(imovel) || nomeJaCadastrado(imovel);
+    }
+
+    public boolean idJaCadastrado(Imovel novoImovel) {
+        List<Imovel> imoveis = new ArrayList<>(getTodos());
+
+        for (Imovel imovel : imoveis) {
+            if(imovel.getId() == novoImovel.getId()) throw new AlreadyExistingException("Imovel já cadastrado");
+        }
+
+        return false;
+    }
+
+    public boolean nomeJaCadastrado(Imovel novoImovel){
+        List<Imovel> imoveis = new ArrayList<>(getTodos());
+
+        for(Imovel imovel : imoveis){
+            if(imovel.getNome().equals(novoImovel.getNome())) throw new AlreadyExistingException("Imovel já cadastrado");
+        }
+
+        return false;
+    }
+
+    public int generateId(){
+        return getTodos().size() + 1;
+    }
+
+    public boolean bairroExiste(int idBairro){
+        BairroRepo repo = new BairroRepo();
+
+        return repo.bairroExistente(idBairro);
     }
 }

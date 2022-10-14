@@ -6,5 +6,9 @@
     "largura" : 24.5,
     "comprimento" : 20.4
   } ],
-  "idBairro" : 1
+  "idBairro" : 1,
+  "comodoArea" : [ {
+    "nome" : "cozinha",
+    "comodoArea" : 499.79999999999995
+  } ]
 } ]

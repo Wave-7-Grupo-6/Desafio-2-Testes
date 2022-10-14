@@ -1,8 +1,8 @@
 package com.example.desafio02.repository;
 
-import com.example.desafio02.exception.AlreadyRegisteredException;
+import com.example.desafio02.exception.AlreadyExistingException;
+import com.example.desafio02.exception.NotFoundException;
 import com.example.desafio02.model.Bairro;
-import com.example.desafio02.util.NumberGenerator;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -29,14 +29,11 @@ public class BairroRepo {
     public Optional<List<Bairro>> salvarBairro(List<Bairro> novosBairros){
         List<Bairro> bairros = new ArrayList<>(getTodos());
         ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
-        NumberGenerator numberGenerator = new NumberGenerator(bairros.size());
 
         for(Bairro bairro : novosBairros){
             if(!bairroExistente(bairro)) {
-                bairro.setId(numberGenerator.getNext());
+                bairro.setId(generateId());
                 bairros.add(bairro);
-            } else {
-                throw new AlreadyRegisteredException("Bairro já cadastrado.");
             }
         }
 
@@ -52,10 +49,40 @@ public class BairroRepo {
     }
 
     public Optional<Bairro> getBairroPeloId(int id){
+        if(getTodos().size() < id || id == 0) throw new NotFoundException("Bairro não encontrado");
+
         return Optional.of(getTodos().get(id - 1));
     }
 
     public boolean bairroExistente(Bairro bairro){
-        return getTodos().stream().anyMatch(item -> bairro.getNome().equals(item.getNome()));
+        return idJaCadastrado(bairro) || nomeJaCadastrado(bairro);
+    }
+
+    public boolean idJaCadastrado(Bairro novoBairro) {
+        List<Bairro> bairros = new ArrayList<>(getTodos());
+
+        for (Bairro bairro : bairros) {
+            if(bairro.getId() == novoBairro.getId()) throw new AlreadyExistingException("Bairro já cadastrado");
+        }
+
+        return false;
+    }
+
+    public boolean nomeJaCadastrado(Bairro novoBairro){
+        List<Bairro> bairros = new ArrayList<>(getTodos());
+
+        for(Bairro bairro : bairros){
+            if(bairro.getNome().equals(novoBairro.getNome())) throw new AlreadyExistingException("Bairro já cadastrado");
+        }
+
+        return false;
+    }
+
+    public int generateId(){
+        return getTodos().size() + 1;
+    }
+
+    public boolean bairroExistente(int idBairro){
+        return getBairroPeloId(idBairro).isPresent();
     }
 }

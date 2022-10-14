@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 @Data
 public class Comodo {
     @NotBlank(message = "O campo não pode ser vazio!")
-    @Pattern(regexp = "^[A-ZÁÉÍÓÚÀÈÌÒÙÂÊÎÔÛÃÕ][a-záéíóúàèìòùâêîôûãõ]+")
+    @Pattern(regexp = "\\b[A-Z]\\w*\\b")
     @Size(max = 30, message = "O comprimento do nome não pode exceder 30 caracteres!")
     private String nome;
 

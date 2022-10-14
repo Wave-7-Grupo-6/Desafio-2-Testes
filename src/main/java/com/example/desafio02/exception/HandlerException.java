@@ -1,14 +1,11 @@
 package com.example.desafio02.exception;
 
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.validation.ConstraintViolationException;
 import java.time.LocalDateTime;
@@ -47,16 +44,16 @@ public class HandlerException {
         return new ResponseEntity<>(exceptionDetails, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(AlreadyRegisteredException.class)
-    public ResponseEntity<ExceptionDetails> handlerNotFoundException(AlreadyRegisteredException ex){
+    @ExceptionHandler(AlreadyExistingException.class)
+    public ResponseEntity<ExceptionDetails> handlerAlreadyExistingException(AlreadyExistingException ex){
         ExceptionDetails exceptionDetails = ExceptionDetails.builder()
-                .title("Objeto já registrado")
+                .title("Objeto já cadastrado")
                 .message(ex.getMessage())
-                .status(HttpStatus.CONFLICT.value())
+                .status(HttpStatus.BAD_REQUEST.value())
                 .timeStamp(LocalDateTime.now())
                 .build();
 
-        return new ResponseEntity<>(exceptionDetails, HttpStatus.CONFLICT);
+        return new ResponseEntity<>(exceptionDetails, HttpStatus.BAD_REQUEST);
     }
 
     private ResponseEntity<InvalidArgumentExceptionDetails> buildInvalidArgumentException(List<FieldError> errors){
