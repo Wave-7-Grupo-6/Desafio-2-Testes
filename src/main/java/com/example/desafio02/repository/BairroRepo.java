@@ -9,10 +9,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import org.springframework.stereotype.Repository;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Repository
 public class BairroRepo {
@@ -26,7 +23,7 @@ public class BairroRepo {
             System.out.println("Erro ao ler o arquivo");
         }
 
-        return null;
+        return Collections.emptyList();
     }
 
     public Optional<List<Bairro>> salvarBairro(List<Bairro> novosBairros){
@@ -52,7 +49,7 @@ public class BairroRepo {
     }
 
     public Optional<Bairro> getBairroPeloId(int id){
-        if(getTodos().size() < id) throw new NotFoundException("Bairro não encontrado");
+        if(getTodos().size() < id || id == 0) throw new NotFoundException("Bairro não encontrado");
 
         return Optional.of(getTodos().get(id - 1));
     }
@@ -83,5 +80,9 @@ public class BairroRepo {
 
     public int generateId(){
         return getTodos().size() + 1;
+    }
+
+    public boolean bairroExistente(int idBairro){
+        return getBairroPeloId(idBairro).isPresent();
     }
 }
