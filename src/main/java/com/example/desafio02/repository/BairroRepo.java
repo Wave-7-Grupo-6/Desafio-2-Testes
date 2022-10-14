@@ -1,5 +1,6 @@
 package com.example.desafio02.repository;
 
+import com.example.desafio02.exception.AlreadyExistingException;
 import com.example.desafio02.model.Bairro;
 import com.example.desafio02.util.NumberGenerator;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
@@ -53,6 +54,26 @@ public class BairroRepo {
     }
 
     public boolean bairroExistente(Bairro bairro){
-        return getTodos().contains(bairro);
+        return idJaCadastrado(bairro) || nomeJaCadastrado(bairro);
+    }
+
+    public boolean idJaCadastrado(Bairro novoBairro) {
+        List<Bairro> bairros = new ArrayList<>(getTodos());
+
+        for (Bairro bairro : bairros) {
+            if(bairro.getId() == novoBairro.getId()) throw new AlreadyExistingException("Bairro já cadastrado");
+        }
+
+        return false;
+    }
+
+    public boolean nomeJaCadastrado(Bairro novoBairro){
+        List<Bairro> bairros = new ArrayList<>(getTodos());
+
+        for(Bairro bairro : bairros){
+            if(bairro.getNome().equals(novoBairro.getNome())) throw new AlreadyExistingException("Bairro já cadastrado");
+        }
+
+        return false;
     }
 }
