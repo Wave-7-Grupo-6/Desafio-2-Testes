@@ -3,7 +3,6 @@ package com.example.desafio02.repository;
 import com.example.desafio02.exception.AlreadyExistingException;
 import com.example.desafio02.exception.NotFoundException;
 import com.example.desafio02.model.Bairro;
-import com.example.desafio02.util.NumberGenerator;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -19,7 +18,6 @@ import java.util.Optional;
 public class BairroRepo {
     private String linkFile = "src/main/resources/bairros.json";
     private ObjectMapper mapper = new ObjectMapper();
-    private NumberGenerator numberGenerator = new NumberGenerator();
 
     public List<Bairro> getTodos(){
         try{
@@ -36,7 +34,10 @@ public class BairroRepo {
         ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
 
         for(Bairro bairro : novosBairros){
-            if(!bairroExistente(bairro)) bairros.add(bairro);
+            if(!bairroExistente(bairro)) {
+                bairro.setId(generateId());
+                bairros.add(bairro);
+            }
         }
 
         try{
@@ -78,5 +79,9 @@ public class BairroRepo {
         }
 
         return false;
+    }
+
+    public int generateId(){
+        return getTodos().size() + 1;
     }
 }
