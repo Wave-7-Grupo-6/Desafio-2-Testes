@@ -43,4 +43,14 @@ public class ImovelRepo {
 
         return null;
     }
+
+    public Optional<Imovel> getImovelPeloId(int id){
+        List<Imovel> imoveis = new ArrayList<>(getTodos());
+
+        for (Imovel imovel : imoveis) {
+            if(imovel.getId() == id) return Optional.of(imovel);
+        }
+
+        return Optional.empty();
+    }
 }

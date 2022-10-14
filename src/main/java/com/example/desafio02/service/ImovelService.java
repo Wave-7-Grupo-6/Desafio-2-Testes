@@ -21,4 +21,9 @@ public class ImovelService implements IImovel{
     public List<Imovel> getTodos() {
         return repo.getTodos();
     }
+
+    @Override
+    public Imovel getImovelPeloId(int id) {
+        return repo.getImovelPeloId(id).get();
+    }
 }
