@@ -1,6 +1,8 @@
 package com.example.desafio02.service;
 
 import com.example.desafio02.dto.ComodoDTO;
+import com.example.desafio02.exception.AlreadyExistingException;
+import com.example.desafio02.exception.NotFoundException;
 import com.example.desafio02.model.Imovel;
 import com.example.desafio02.repository.ImovelRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,7 @@ public class ImovelService implements IImovel{
     private ImovelRepo repo;
 
     @Override
-    public Imovel salvarImovel(Imovel imovel) {
+    public Imovel salvarImovel(Imovel imovel) throws AlreadyExistingException, NotFoundException {
         return repo.salvarImovel(imovel).get();
     }
 
