@@ -66,7 +66,7 @@ class BairroServiceTest {
     void getBairroPeloId_throwsNotFoundException_quandoBairroNaoExiste() {
         Integer bairroId = 1;
         Bairro bairro = novoBairro();
-        when(repo.getBairroPeloId(anyInt())).thenReturn(Optional.empty());
+        when(repo.getBairroPeloId(anyInt())).thenThrow(NotFoundException.class);
 
         assertThrows(NotFoundException.class, ()-> service.getBairroPeloId(bairroId));
     }

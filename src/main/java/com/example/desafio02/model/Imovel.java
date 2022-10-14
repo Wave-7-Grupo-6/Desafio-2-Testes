@@ -1,7 +1,9 @@
 package com.example.desafio02.model;
 
 import com.example.desafio02.dto.ComodoDTO;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
@@ -13,6 +15,8 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Imovel {
     private int id;
 
