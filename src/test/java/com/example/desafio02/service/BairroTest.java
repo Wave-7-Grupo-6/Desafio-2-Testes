@@ -39,12 +39,9 @@ class BairroTest {
 
         Mockito.when(repo.salvarBairro(bairros)).thenReturn(Optional.of(bairros));
 
-        List<Bairro> bairroEntrada = new ArrayList<>() {{
-            add(bairro);
-        }};
+        service.salvarBairro(bairros);
+        List<BairroDTO> saidaBairro = service.salvarBairro(bairros);
 
-        List<BairroDTO> salvarBairro = service.salvarBairro(bairros);
-
-        assertThat(salvarBairro).isNotNull();
+        assertThat(saidaBairro).isNotNull();
     }
 }
