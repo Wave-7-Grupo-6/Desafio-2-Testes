@@ -13,7 +13,7 @@ public interface IImovel {
     List<Imovel> getTodos();
     Imovel getImovelPeloId(int id);
 
-    Double getImovelArea(int id);
+    String getImovelArea(int id);
 
    List<ComodoDTO> getImovelComodosArea(int id);
 

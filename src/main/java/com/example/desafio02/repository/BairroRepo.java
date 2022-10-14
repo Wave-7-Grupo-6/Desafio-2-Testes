@@ -9,10 +9,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import org.springframework.stereotype.Repository;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Repository
 public class BairroRepo {
@@ -26,7 +23,7 @@ public class BairroRepo {
             System.out.println("Erro ao ler o arquivo");
         }
 
-        return null;
+        return Collections.emptyList();
     }
 
     public Optional<List<Bairro>> salvarBairro(List<Bairro> novosBairros){

@@ -33,7 +33,7 @@ public class ImovelController {
     }
 
     @GetMapping("/area/{id}")
-    public ResponseEntity<Double> getImovelArea(@PathVariable int id){
+    public ResponseEntity<String> getImovelArea(@PathVariable int id){
         return new ResponseEntity<>(imovelService.getImovelArea(id), HttpStatus.OK);
     }
 
