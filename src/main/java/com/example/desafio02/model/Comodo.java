@@ -1,7 +1,9 @@
 package com.example.desafio02.model;
 
+import lombok.AllArgsConstructor;
 import com.example.desafio02.dto.ComodoDTO;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
@@ -11,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Comodo {
     @NotBlank(message = "O campo não pode ser vazio!")
     @Pattern(regexp = "\\b[A-Z]\\w*\\b")
