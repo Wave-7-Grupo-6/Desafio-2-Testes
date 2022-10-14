@@ -10,20 +10,56 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import javax.validation.ConstraintViolationException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @ControllerAdvice
-public class HandlerException extends ResponseEntityExceptionHandler {
+public class HandlerException {
 
-    @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-                                                                  HttpHeaders headers,
-                                                                  HttpStatus status,
-                                                                  WebRequest request) {
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    protected ResponseEntity<InvalidArgumentExceptionDetails> handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {
         List<FieldError> errors = ex.getBindingResult().getFieldErrors();
 
+        return buildInvalidArgumentException(errors);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<InvalidArgumentExceptionDetails> handleConstraintViolationException(ConstraintViolationException ex) {
+        List<FieldError> errors = ex.getConstraintViolations().stream()
+                .map(constraintViolation -> new FieldError(constraintViolation.getRootBeanClass().getName(),
+                        constraintViolation.getPropertyPath().toString(), constraintViolation.getMessage()))
+                .collect(Collectors.toList());
+
+        return buildInvalidArgumentException(errors);
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<ExceptionDetails> handlerNotFoundException(NotFoundException ex){
+        ExceptionDetails exceptionDetails = ExceptionDetails.builder()
+                .title("Objeto não encontrado")
+                .message(ex.getMessage())
+                .status(HttpStatus.NOT_FOUND.value())
+                .timeStamp(LocalDateTime.now())
+                .build();
+
+        return new ResponseEntity<>(exceptionDetails, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(AlreadyRegisteredException.class)
+    public ResponseEntity<ExceptionDetails> handlerNotFoundException(AlreadyRegisteredException ex){
+        ExceptionDetails exceptionDetails = ExceptionDetails.builder()
+                .title("Objeto já registrado")
+                .message(ex.getMessage())
+                .status(HttpStatus.CONFLICT.value())
+                .timeStamp(LocalDateTime.now())
+                .build();
+
+        return new ResponseEntity<>(exceptionDetails, HttpStatus.CONFLICT);
+    }
+
+    private ResponseEntity<InvalidArgumentExceptionDetails> buildInvalidArgumentException(List<FieldError> errors){
         return new ResponseEntity<>(
                 InvalidArgumentExceptionDetails.builder()
                         .title("Parametros inválidos")
@@ -40,18 +76,4 @@ public class HandlerException extends ResponseEntityExceptionHandler {
                 HttpStatus.BAD_REQUEST
         );
     }
-
-    @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<ExceptionDetails> handlerNotFoundException(NotFoundException ex){
-        ExceptionDetails exceptionDetails = ExceptionDetails.builder()
-                .title("Objeto não encontrado")
-                .message(ex.getMessage())
-                .status(HttpStatus.NOT_FOUND.value())
-                .timeStamp(LocalDateTime.now())
-                .build();
-
-        return new ResponseEntity<>(exceptionDetails, HttpStatus.NOT_FOUND);
-    }
-
-
 }

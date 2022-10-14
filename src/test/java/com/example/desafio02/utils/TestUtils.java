@@ -14,8 +14,4 @@ public class TestUtils {
         return new Bairro(1, "Bairro 1", new BigDecimal(25));
     }
 
-//    public static BairroDTO novoBairroDTO(){
-//        return new BairroDTO(1, "Bairro 1", new BigDecimal(25));
-//    }
-
 }
