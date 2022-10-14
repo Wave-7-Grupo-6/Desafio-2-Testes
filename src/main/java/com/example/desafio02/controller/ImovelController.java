@@ -36,8 +36,13 @@ public class ImovelController {
         return new ResponseEntity<>(imovelService.getImovelArea(id), HttpStatus.OK);
     }
 
-    @GetMapping("/area_comodos/{id}")
-    public ResponseEntity<List<ComodoDTO>> getImovelComodosArea(@PathVariable int id){
-        return new ResponseEntity<>(imovelService.getImovelComodosArea(id), HttpStatus.OK);
+//    @GetMapping("/area_comodos/{id}")
+//    public ResponseEntity<List<ComodoDTO>> getImovelComodosArea(@PathVariable int id){
+//        return new ResponseEntity<>(imovelService.getImovelComodosArea(id), HttpStatus.OK);
+//    }
+
+    @GetMapping("/valor_imovel/{id}")
+    public ResponseEntity<Double> getValorImovel(@PathVariable int id){
+        return new ResponseEntity<>(imovelService.getValorImovel(id), HttpStatus.OK);
     }
 }

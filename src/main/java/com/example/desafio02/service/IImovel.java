@@ -12,5 +12,7 @@ public interface IImovel {
 
     Double getImovelArea(int id);
 
-    List<ComodoDTO> getImovelComodosArea(int id);
+   // List<ComodoDTO> getImovelComodosArea(int id);
+
+    Double getValorImovel(int id);
 }

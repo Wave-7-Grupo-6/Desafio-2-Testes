@@ -14,11 +14,11 @@ public class Imovel {
     private List<Comodo> comodos;
     private int idBairro;
 
-    public void adicionarNovoComodo(Comodo comodo){
-        if (comodos == null) comodos = new ArrayList<>();
-
-        comodos.add(comodo);
-    }
+//    public void adicionarNovoComodo(Comodo comodo){
+//        if (comodos == null) comodos = new ArrayList<>();
+//
+//        comodos.add(comodo);
+//    }
 
     public double areaTotal(){
         double areaTotal = 0;
@@ -29,9 +29,10 @@ public class Imovel {
         return areaTotal;
     }
 
-    public List<ComodoDTO> getComodoArea(){
-        List<ComodoDTO> listaComodos = new ArrayList<ComodoDTO>();
-        for(Comodo comodo: comodos) listaComodos.add(new ComodoDTO(comodo));
-        return listaComodos;
-    }
+//    public List<ComodoDTO> getComodoArea(){
+//        List<ComodoDTO> listaComodos = new ArrayList<ComodoDTO>();
+//        for(Comodo comodo: comodos) listaComodos.add(new ComodoDTO(comodo));
+//        return listaComodos;
+//    }
+
 }

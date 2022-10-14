@@ -1,5 +1,6 @@
 package com.example.desafio02.service;
 
+import com.example.desafio02.dto.BairroDTO;
 import com.example.desafio02.dto.ComodoDTO;
 import com.example.desafio02.model.Imovel;
 import com.example.desafio02.repository.ImovelRepo;
@@ -33,8 +34,15 @@ public class ImovelService implements IImovel{
         return imovel.areaTotal();
     }
 
-    public List<ComodoDTO> getImovelComodosArea(int id){
+//    public List<ComodoDTO> getImovelComodosArea(int id){
+//        Imovel imovel = getImovelPeloId(id);
+//        return imovel.getComodoArea();
+//    }
+
+    public Double getValorImovel(int id){
         Imovel imovel = getImovelPeloId(id);
-        return imovel.getComodoArea();
+        BairroService bairro = new BairroService();
+        BairroDTO bairroPorId = bairro.getBairroPeloId(imovel.getIdBairro());
+        return imovel.areaTotal() * bairroPorId.getValorMetro().doubleValue();
     }
 }
