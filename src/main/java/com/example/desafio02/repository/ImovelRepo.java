@@ -58,7 +58,7 @@ public class ImovelRepo {
             if(imovel.getId() == id) return Optional.of(imovel);
         }
 
-        return Optional.empty();
+        throw new NotFoundException("Imovel não encontrado");
     }
 
     public boolean imovelExistente(Imovel imovel){
