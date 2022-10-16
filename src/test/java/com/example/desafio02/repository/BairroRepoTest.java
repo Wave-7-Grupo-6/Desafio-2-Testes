@@ -1,8 +1,10 @@
 package com.example.desafio02.repository;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.File;
+import java.math.BigDecimal;
 import java.util.*;
 
 import org.junit.jupiter.api.AfterEach;
@@ -39,6 +41,19 @@ public class BairroRepoTest {
         } catch (Exception ex) {
             System.out.println("Erro ao ler o arquivo");
         }
+    }
+
+    @Test
+    void salvarBairro_returnTodos_quandoSucesso() {
+        List<Bairro> bairros = new ArrayList<>() {{
+            add(new Bairro(1, "Terra Firme", new BigDecimal(30)));
+            add(new Bairro(2, "Cremação", new BigDecimal(30)));
+        }};
+
+        Optional<List<Bairro>> resultadoBairros = repo.salvarBairro(bairros);
+
+        assertEquals(bairros, resultadoBairros.get());
+        assertEquals(2, resultadoBairros.get().size());
     }
 
     @Test
