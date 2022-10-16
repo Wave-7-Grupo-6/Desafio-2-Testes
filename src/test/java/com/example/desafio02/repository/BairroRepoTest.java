@@ -23,7 +23,6 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 public class BairroRepoTest {
 
     private BairroRepo repo = new BairroRepo();
-    private ObjectMapper mapper = new ObjectMapper();
 
     @BeforeEach
     public void setup() {
@@ -32,6 +31,7 @@ public class BairroRepoTest {
 
     @AfterEach
     public void tearDown() {
+        ObjectMapper mapper = new ObjectMapper();
         ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
 
         try {
