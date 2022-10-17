@@ -20,10 +20,12 @@ public class Comodo {
 
     @NotNull(message = "A largura do cômodo não pode estar vazia!")
     @Max( value = 25, message = "A largura máxima permitida por cômodo é de 25 metros!")
+    @Positive
     private Double largura;
 
     @NotNull(message = "O comprimento do cômodo não pode estar vazio!")
     @Max( value = 33, message = "O comprimento máximo permitida por cômodo é de 33 metros!")
+    @Positive
     private Double comprimento;
 
     public Double getComodoArea(){
