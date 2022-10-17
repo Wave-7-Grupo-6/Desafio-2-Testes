@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class ImovelController {
     private IImovel imovelService;
 
     @PostMapping("/salvar")
-    public ResponseEntity<Imovel> salvarImovel(@RequestBody Imovel imovel){
+    public ResponseEntity<Imovel> salvarImovel(@Valid @RequestBody Imovel imovel){
         return new ResponseEntity<>(imovelService.salvarImovel(imovel), HttpStatus.CREATED);
     }
 
