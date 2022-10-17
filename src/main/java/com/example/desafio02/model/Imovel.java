@@ -6,10 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
@@ -21,6 +18,8 @@ public class Imovel {
     private int id;
 
     @NotBlank(message = "O nome do imóvel não pode estar em branco")
+    @NotEmpty(message = "O nome do imóvel não pode estar vazio")
+    @NotNull(message = "O nome do imóvel não pode ser nulo")
     private String nome;
 
     @NotEmpty(message = "A lista de comodos não pode estar vazia")

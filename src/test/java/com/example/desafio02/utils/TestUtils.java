@@ -23,6 +23,12 @@ public class TestUtils {
     }
     public static List<Comodo> novaListaComodos(){
         return Arrays.asList(
+                new Comodo("Sala", 5.0, 5.0),
+                new Comodo("Quarto", 4.0, 5.0)
+        );
+    }
+    public static List<Comodo> novaListaComodosNomeInvalido(){
+        return Arrays.asList(
                 new Comodo("sala", 5.0, 5.0),
                 new Comodo("quarto", 4.0, 5.0)
         );
