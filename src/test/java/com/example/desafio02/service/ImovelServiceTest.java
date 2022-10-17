@@ -3,7 +3,6 @@ package com.example.desafio02.service;
 import com.example.desafio02.dto.ComodoDTO;
 import com.example.desafio02.model.Comodo;
 import com.example.desafio02.model.Imovel;
-import com.example.desafio02.repository.BairroRepo;
 import com.example.desafio02.repository.ImovelRepo;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,12 +10,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import static com.example.desafio02.utils.TestUtils.novoImovel;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
@@ -29,15 +28,31 @@ class ImovelServiceTest {
     private ImovelService service;
 
     @Test
-    void salvarImovel() {
+    void salvarImovel_returnImovel_quandoSucesso() {
+        Imovel imovel = novoImovel();
+        when(repo.salvarImovel(imovel)).thenReturn(Optional.of(imovel));
+
+        Imovel imovelSalvo = service.salvarImovel(novoImovel());
+
+        assertThat(imovelSalvo.getNome()).isEqualTo(imovel.getNome());
+        assertThat(imovelSalvo.getComodos()).isEqualTo(imovel.getComodos());
+        assertThat(imovelSalvo.getIdBairro()).isEqualTo(imovel.getIdBairro());
     }
 
     @Test
-    void getTodos() {
+    void getTodos_returnListaImoveis_quandoSucesso() {
+        List<Imovel> imoveis = Arrays.asList(novoImovel());
+        when(repo.getTodos()).thenReturn(imoveis);
+
+        assertThat(service.getTodos()).isEqualTo(imoveis);
     }
 
     @Test
-    void getImovelPeloId() {
+    void getImovelPeloId_returnImovel_quandoSucesso() {
+        Imovel imovel = novoImovel();
+        when(repo.getImovelPeloId(anyInt())).thenReturn(Optional.of(imovel));
+
+        assertThat(service.getImovelPeloId(imovel.getId())).isEqualTo(imovel);
     }
 
     @Test
