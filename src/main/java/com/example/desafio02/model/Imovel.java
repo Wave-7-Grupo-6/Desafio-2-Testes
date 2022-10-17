@@ -18,8 +18,6 @@ public class Imovel {
     private int id;
 
     @NotBlank(message = "O nome do imóvel não pode estar em branco")
-    @NotEmpty(message = "O nome do imóvel não pode estar vazio")
-    @NotNull(message = "O nome do imóvel não pode ser nulo")
     private String nome;
 
     @NotEmpty(message = "A lista de comodos não pode estar vazia")
