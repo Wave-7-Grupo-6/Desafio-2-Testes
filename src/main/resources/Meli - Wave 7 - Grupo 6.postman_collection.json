@@ -1,0 +1,207 @@
+{
+	"info": {
+		"_postman_id": "66819db6-c4a3-40a0-84e2-9364d3a3971b",
+		"name": "Meli - Wave 7 - Grupo 6",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Desafio",
+			"item": [
+				{
+					"name": "Desafio 2",
+					"item": [
+						{
+							"name": "Todos - bairros",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/bairros/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"bairros",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Salvar bairros",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\n        \"nome\": \"Jardim teste\",\n        \"valorMetro\": 24692.00\n    }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/bairros/salvar",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"bairros",
+										"salvar"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "pelo id - bairros",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/bairros/pelo_id/12",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"bairros",
+										"pelo_id",
+										"12"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Todos - Imoveis",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/imoveis/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"imoveis",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Salvar imovel",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{    \n    \"nome\" : \"PalmeiraLoftII\",\n    \"idBairro\" : 3,\n    \"comodos\" : [{\n        \"nome\" : \"Cozinha\",\n        \"largura\" : 12.5,\n        \"comprimento\" : 20.4\n    },{\n        \"nome\" : \"Quarto\",\n        \"largura\" : 13.0,\n        \"comprimento\" : 21.0\n    }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/imoveis/salvar",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"imoveis",
+										"salvar"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "pelo id - imoveis",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/imoveis/pelo_id/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"imoveis",
+										"pelo_id",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Valor Imovel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/imoveis/valor_imovel/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"imoveis",
+										"valor_imovel",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Maior Comodo",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/imoveis/maior_comodo/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"imoveis",
+										"maior_comodo",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "local",
+			"value": "http://localhost:8080/"
+		}
+	]
+}
