@@ -274,7 +274,7 @@ src/main/resources/Meli - Wave 7 - Grupo 6.postman_collection.json
 **Retorno em caso de sucesso**
 
 ```json
-255,00
+255.00
 ```
 
 | Descrição                                                                        |
