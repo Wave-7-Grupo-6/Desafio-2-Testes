@@ -69,6 +69,15 @@ public class BairroRepoTest {
     }
 
     @Test
+    void getTodos_returnCollecionEmpty_quandoErroNaLeitura() {
+        repo.setLinkFile("src/test/resources/bairros-mock-erro.json");
+
+        List<Bairro> resultadoBairros = repo.getTodos();
+
+        assertEquals(Collections.emptyList(), resultadoBairros);
+    }
+
+    @Test
     void getBairroPeloId_returnBairro_quandoSucesso() {
         Bairro bairro = novoBairro();
         List<Bairro> bairros = Arrays.asList(bairro);
