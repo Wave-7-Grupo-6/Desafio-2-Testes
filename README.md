@@ -34,7 +34,7 @@ mvn spring-boot:run
 
 1. Importar o arquivo:
 ```shell
-src/main/resources/MELI - DH.postman_collection.json
+src/main/resources/Meli - Wave 7 - Grupo 6.postman_collection.json
 ```
 
 # 💡 Documentação da API
