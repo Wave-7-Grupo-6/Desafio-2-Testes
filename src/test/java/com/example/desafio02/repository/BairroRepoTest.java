@@ -7,6 +7,7 @@ import java.io.File;
 import java.math.BigDecimal;
 import java.util.*;
 
+import com.example.desafio02.exception.NotFoundException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -63,6 +64,22 @@ public class BairroRepoTest {
         repo.salvarBairro(bairros);
 
         assertThrows(AlreadyExistingException.class, () -> repo.salvarBairro(bairros));
+    }
+
+    @Test
+    void getBairroPeloId_returnBairro_quandoSucesso() {
+        Bairro bairro = novoBairro();
+        List<Bairro> bairros = Arrays.asList(bairro);
+        repo.salvarBairro(bairros);
+
+        Optional<Bairro> resultadoBairro = repo.getBairroPeloId(1);
+
+        assertEquals(bairro, resultadoBairro.get());
+    }
+
+    @Test
+    void getBairroPeloId_throwsNotFoundException_quandoNaoEncontraId() {
+        assertThrows(NotFoundException.class, () -> repo.getBairroPeloId(1));
     }
 
 }
