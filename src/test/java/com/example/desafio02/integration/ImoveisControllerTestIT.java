@@ -145,20 +145,32 @@ public class ImoveisControllerTestIT {
                         get("/imoveis")
                                 .contentType(MediaType.APPLICATION_JSON)
                 )
-                .andExpect(status().isOk());
-              //.andExpect(jsonPath("$[0].nome", CoreMatchers.is(novoImovel().getNome())));
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].nome", CoreMatchers.is(novoImovel().getNome())));
     }
 
-//    @Test
-//    void getBairroPeloId_returnBairrosDTO_quandoSucesso() throws Exception {
-//        Bairro bairro = repo.salvarBairro(Arrays.asList(novoBairro())).get().get(0);
-//
-//        mockMvc.perform(
-//                        get("/bairros/pelo_id/{id}", bairro.getId())
-//                                .contentType(MediaType.APPLICATION_JSON)
-//                )
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.nome", CoreMatchers.is(novoBairro().getNome())));
-//
-//    }
+    @Test
+    void getImovelPeloId_returnImovel_quandoSucesso() throws Exception {
+        repo.salvarImovel(novoImovel());
+
+        mockMvc.perform(
+                        get("/imoveis/pelo_id/{id}", 1)
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.nome", CoreMatchers.is(novoImovel().getNome())));
+
+    }
+
+    @ParameterizedTest
+    @CsvSource({"-5" , "0", "2"})
+    void getImovelPeloId_throwNotFound_quandoIdInvalido(int id) throws Exception {
+        repo.salvarImovel(novoImovel());
+
+        mockMvc.perform(
+                        get("/imoveis/pelo_id/{id}", id)
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andExpect(status().isNotFound());
+    }
 }
