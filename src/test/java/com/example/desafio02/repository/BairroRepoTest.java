@@ -101,6 +101,13 @@ public class BairroRepoTest {
     }
 
     @Test
+    void nomeJaCadastrado_returnFalse_quandoNaoEstaCadastrado() {
+        Bairro bairro = novoBairro();
+
+        assertFalse(repo.nomeJaCadastrado(bairro));
+    }
+
+    @Test
     void bairroExistentePorId_retornaTrue_quandoBairroPresente() {
         Bairro bairro = novoBairro();
         List<Bairro> bairros = List.of(bairro);
