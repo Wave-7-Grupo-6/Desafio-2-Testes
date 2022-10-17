@@ -1,6 +1,7 @@
 package com.example.desafio02.service;
 
 import com.example.desafio02.dto.ComodoDTO;
+import com.example.desafio02.model.Comodo;
 import com.example.desafio02.model.Imovel;
 import com.example.desafio02.repository.BairroRepo;
 import com.example.desafio02.repository.ImovelRepo;

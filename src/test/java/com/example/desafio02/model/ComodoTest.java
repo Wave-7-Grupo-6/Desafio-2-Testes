@@ -20,6 +20,6 @@ class ComodoTest {
 
         double areaComodo = comodo.getComprimento() * comodo.getLargura();
 
-        assertThat(comodo.getComodoArea()).isEqualTo(areaComodo);
+        assertThat(comodo.setarComodoArea()).isEqualTo(areaComodo);
     }
 }

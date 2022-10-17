@@ -7,6 +7,7 @@ import com.example.desafio02.model.Imovel;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import lombok.Data;
 import org.springframework.stereotype.Repository;
 
 import java.io.File;
@@ -16,8 +17,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
+@Data
 public class ImovelRepo {
-    private final String linkFile = "src/main/resources/imoveis.json";
+    private String linkFile = "src/main/resources/imoveis.json";
     private ObjectMapper mapper = new ObjectMapper();
 
     public Optional<Imovel> salvarImovel(Imovel novoImovel){
@@ -32,12 +34,10 @@ public class ImovelRepo {
 
         try{
             writer.writeValue(new File(linkFile), imoveis);
-
             return Optional.of(novoImovel);
         } catch (Exception ex){
             System.out.println("Erro ao salvar os dados");
         }
-
         return Optional.empty();
     }
 
