@@ -33,6 +33,18 @@ public class TestUtils {
                 new Comodo("quarto", 4.0, 5.0)
         );
     }
+    public static List<Comodo> novaListaComodosLarguraEComprimentoInvalidos(){
+        return Arrays.asList(
+                new Comodo("Sala", 5.0, 5.0),
+                new Comodo("Quarto", 27.0, 35.0)
+        );
+    }
+    public static List<Comodo> novaListaComodosLarguraEComprimentoNegativos(){
+        return Arrays.asList(
+                new Comodo("Sala", -5.0, -5.0),
+                new Comodo("Quarto", 4.0, 5.0)
+        );
+    }
 
     public static List<ComodoDTO> novaListaComodosDTO(){
         return novaListaComodos().stream().map(ComodoDTO::new).collect(Collectors.toList());
