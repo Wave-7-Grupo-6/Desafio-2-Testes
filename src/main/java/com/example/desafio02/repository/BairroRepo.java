@@ -86,7 +86,7 @@ public class BairroRepo {
         return getTodos().size() + 1;
     }
 
-    public boolean bairroExistente(int idBairro){
+    public boolean bairroExistentePorId(int idBairro){
         return getBairroPeloId(idBairro).isPresent();
     }
 }

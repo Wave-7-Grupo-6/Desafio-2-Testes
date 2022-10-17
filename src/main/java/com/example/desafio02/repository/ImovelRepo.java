@@ -92,6 +92,6 @@ public class ImovelRepo {
     public boolean bairroExiste(int idBairro){
         BairroRepo repo = new BairroRepo();
 
-        return repo.bairroExistente(idBairro);
+        return repo.bairroExistentePorId(idBairro);
     }
 }
