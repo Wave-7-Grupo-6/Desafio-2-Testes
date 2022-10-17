@@ -3,9 +3,11 @@ package com.example.desafio02.controller;
 import com.example.desafio02.dto.BairroDTO;
 import com.example.desafio02.dto.ComodoDTO;
 import com.example.desafio02.exception.NotFoundException;
+import com.example.desafio02.model.Bairro;
 import com.example.desafio02.model.Imovel;
 import com.example.desafio02.service.BairroService;
 import com.example.desafio02.service.ImovelService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.Test;
@@ -22,8 +24,10 @@ import java.util.List;
 import static com.example.desafio02.utils.TestUtils.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -39,7 +43,22 @@ class ImovelControllerTest {
     private ImovelService service;
 
     @Test
-    void salvarImovel() {
+    void salvarImovel_returnListaImovel_quandoSucesso() throws Exception {
+        Imovel imovel = novoImovel();
+
+        when(service.salvarImovel(imovel)).thenReturn(imovel);
+
+        mockMvc.perform(
+                        post("/imoveis/salvar")
+                                .content(mapper.writeValueAsString(imovel))
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.nome", CoreMatchers.is(imovel.getNome())))
+                .andExpect(jsonPath("$.idBairro", CoreMatchers.is(imovel.getIdBairro())))
+                .andExpect(jsonPath("$.comodos[0].nome", CoreMatchers.is(imovel.getComodos().get(0).getNome())))
+                .andExpect(jsonPath("$.comodos[0].largura", CoreMatchers.is(imovel.getComodos().get(0).getLargura())))
+                .andExpect(jsonPath("$.comodos[0].comprimento", CoreMatchers.is(imovel.getComodos().get(0).getComprimento())));
     }
 
     @Test
