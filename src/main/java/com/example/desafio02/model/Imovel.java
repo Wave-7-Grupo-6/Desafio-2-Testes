@@ -1,20 +1,35 @@
 package com.example.desafio02.model;
 
+import com.example.desafio02.dto.ComodoDTO;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import java.util.ArrayList;
+import lombok.NoArgsConstructor;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 import java.util.List;
 
+
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Imovel {
     private int id;
+
+    @NotBlank(message = "O nome do imóvel não pode estar em branco")
     private String nome;
-    private List<Comodo> comodos;
+
+    @NotEmpty(message = "A lista de comodos não pode estar vazia")
+    private List<@Valid Comodo> comodos;
+
+    @Min(value = 1, message = "O id do bairro não pode ser menor que 1")
     private int idBairro;
 
-    public void adicionarNovoComodo(Comodo comodo){
-        if (comodos == null) comodos = new ArrayList<>();
-
-        comodos.add(comodo);
+    public double areaTotal(){
+        double areaTotal = 0;
+        for(Comodo comodo: comodos){
+            double area = comodo.getLargura() * comodo.getComprimento();
+            areaTotal = areaTotal + area;
+        }
+        return areaTotal;
     }
 }

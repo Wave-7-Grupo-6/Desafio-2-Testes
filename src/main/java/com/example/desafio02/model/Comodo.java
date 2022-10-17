@@ -1,24 +1,46 @@
 package com.example.desafio02.model;
 
+import lombok.AllArgsConstructor;
+import com.example.desafio02.dto.ComodoDTO;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
-public class Comodo {
+@AllArgsConstructor
+@NoArgsConstructor
+
+public class Comodo implements Comparable <Comodo>{
+
     @NotBlank(message = "O campo não pode ser vazio!")
-    @Pattern(regexp = "^[A-ZÁÉÍÓÚÀÈÌÒÙÂÊÎÔÛÃÕ][a-záéíóúàèìòùâêîôûãõ]+")
+    @Pattern(regexp = "\\b[A-Z]\\w*\\b")
     @Size(max = 30, message = "O comprimento do nome não pode exceder 30 caracteres!")
     private String nome;
 
-    @NotBlank(message = "A largura do cômodo não pode estar vazia!")
+    @NotNull(message = "A largura do cômodo não pode estar vazia!")
     @Max( value = 25, message = "A largura máxima permitida por cômodo é de 25 metros!")
+    @Positive
     private Double largura;
 
-    @NotBlank(message = "O comprimento do cômodo não pode estar vazio!")
+    @NotNull(message = "O comprimento do cômodo não pode estar vazio!")
     @Max( value = 33, message = "O comprimento máximo permitida por cômodo é de 33 metros!")
+    @Positive
     private Double comprimento;
+
+    public Double setarComodoArea(){
+        return this.largura * this.comprimento;
+    }
+
+
+    @Override
+    public int compareTo(Comodo comodo) {
+        if(this.setarComodoArea()> comodo.setarComodoArea())
+            return -1;
+        if (this.setarComodoArea() < comodo.setarComodoArea())
+            return 1;
+        return 0;
+    }
 }
