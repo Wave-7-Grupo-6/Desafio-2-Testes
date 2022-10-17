@@ -1,11 +1,23 @@
 [ {
   "id" : 1,
-  "nome" : null,
+  "nome" : "PalmeiraLoftIII",
   "comodos" : [ {
-    "nome" : "cozinha",
-    "largura" : 24.5,
-    "comprimento" : 20.4,
-    "comodoArea" : 499.79999999999995
+    "nome" : "SalaEstar",
+    "largura" : 12.5,
+    "comprimento" : 20.4
   } ],
-  "idBairro" : 1
+  "idBairro" : 3
+}, {
+  "id" : 2,
+  "nome" : "PalmeiraLoftII",
+  "comodos" : [ {
+    "nome" : "Cozinha",
+    "largura" : 12.5,
+    "comprimento" : 20.4
+  }, {
+    "nome" : "Quarto",
+    "largura" : 13.0,
+    "comprimento" : 21.0
+  } ],
+  "idBairro" : 3
 } ]

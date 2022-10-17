@@ -4,25 +4,28 @@ import com.example.desafio02.dto.BairroDTO;
 import com.example.desafio02.dto.ComodoDTO;
 import com.example.desafio02.exception.AlreadyExistingException;
 import com.example.desafio02.exception.NotFoundException;
+import com.example.desafio02.model.Comodo;
 import com.example.desafio02.model.Imovel;
 import com.example.desafio02.repository.ImovelRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.Collections;
-import java.util.Comparator;
+
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentMap;
+
 import java.util.stream.Collectors;
 
-@Repository
+@Service
 public class ImovelService implements IImovel{
     @Autowired
     private ImovelRepo repo;
+
+    @Autowired
+    private BairroService bairro;
 
     @Override
     public Imovel salvarImovel(Imovel imovel) throws AlreadyExistingException, NotFoundException {
@@ -57,8 +60,9 @@ public class ImovelService implements IImovel{
 
     public BigDecimal getValorImovel(int id){
         Imovel imovel = getImovelPeloId(id);
-        BairroService bairro = new BairroService();
+        System.out.println(imovel);
         BairroDTO bairroPorId = bairro.getBairroPeloId(imovel.getIdBairro());
+        System.out.println(bairroPorId);
         return bairroPorId.getValorMetro().multiply(BigDecimal.valueOf(imovel.areaTotal())).setScale(2, RoundingMode.HALF_EVEN);
     }
 }

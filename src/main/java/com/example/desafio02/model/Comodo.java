@@ -12,7 +12,9 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Comodo {
+
+public class Comodo implements Comparable <Comodo>{
+
     @NotBlank(message = "O campo não pode ser vazio!")
     @Pattern(regexp = "\\b[A-Z]\\w*\\b")
     @Size(max = 30, message = "O comprimento do nome não pode exceder 30 caracteres!")
@@ -28,8 +30,17 @@ public class Comodo {
     @Positive
     private Double comprimento;
 
-    public Double getComodoArea(){
+    public Double setarComodoArea(){
         return this.largura * this.comprimento;
     }
 
+
+    @Override
+    public int compareTo(Comodo comodo) {
+        if(this.setarComodoArea()> comodo.setarComodoArea())
+            return -1;
+        if (this.setarComodoArea() < comodo.setarComodoArea())
+            return 1;
+        return 0;
+    }
 }
