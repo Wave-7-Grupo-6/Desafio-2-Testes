@@ -1,0 +1,53 @@
+[ {
+  "id" : 1,
+  "nome" : "Jardim Panorama",
+  "valorMetro" : 24692.00
+}, {
+  "id" : 2,
+  "nome" : "Jardim América",
+  "valorMetro" : 24171.00
+}, {
+  "id" : 3,
+  "nome" : "Jardim Europa",
+  "valorMetro" : 22079.00
+}, {
+  "id" : 4,
+  "nome" : "Jardim Paulistano",
+  "valorMetro" : 21666.00
+}, {
+  "id" : 5,
+  "nome" : "Vila Nova Conceição",
+  "valorMetro" : 21086.00
+}, {
+  "id" : 6,
+  "nome" : "Jardim Universidade Pinheiros",
+  "valorMetro" : 20637.00
+}, {
+  "id" : 7,
+  "nome" : "Chácara Itaim",
+  "valorMetro" : 19889.00
+}, {
+  "id" : 8,
+  "nome" : "Jardim Luzitânia",
+  "valorMetro" : 19780.00
+}, {
+  "id" : 9,
+  "nome" : "Itaim Bibi",
+  "valorMetro" : 18351.00
+}, {
+  "id" : 10,
+  "nome" : "Vila Olímpia",
+  "valorMetro" : 17263.00
+}, {
+  "id" : 11,
+  "nome" : "Moema",
+  "valorMetro" : 15709.00
+}, {
+  "id" : 12,
+  "nome" : "Cerqueira César",
+  "valorMetro" : 15664.00
+}, {
+  "id" : 13,
+  "nome" : "Jardim teste",
+  "valorMetro" : 24692.00
+} ]
