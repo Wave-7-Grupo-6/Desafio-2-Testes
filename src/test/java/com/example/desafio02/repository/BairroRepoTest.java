@@ -1,8 +1,5 @@
 package com.example.desafio02.repository;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import java.io.File;
 import java.math.BigDecimal;
 import java.util.*;
@@ -15,6 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static com.example.desafio02.utils.TestUtils.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.example.desafio02.exception.AlreadyExistingException;
 import com.example.desafio02.model.Bairro;
@@ -100,6 +98,17 @@ public class BairroRepoTest {
         repo.salvarBairro(bairros);
 
         assertThrows(AlreadyExistingException.class, () -> repo.nomeJaCadastrado(bairro));
+    }
+
+    @Test
+    void bairroExistentePorId_retornaTrue_quandoBairroPresente() {
+        Bairro bairro = novoBairro();
+        List<Bairro> bairros = List.of(bairro);
+        repo.salvarBairro(bairros);
+
+        boolean bairroPresente = repo.bairroExistentePorId(1);
+
+        assertTrue(bairroPresente);
     }
 
 }
