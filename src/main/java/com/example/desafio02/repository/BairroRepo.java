@@ -6,12 +6,16 @@ import com.example.desafio02.model.Bairro;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+
+import lombok.Data;
+
 import org.springframework.stereotype.Repository;
 
 import java.io.File;
 import java.util.*;
 
 @Repository
+@Data
 public class BairroRepo {
     private String linkFile = "src/main/resources/bairros.json";
     private ObjectMapper mapper = new ObjectMapper();
