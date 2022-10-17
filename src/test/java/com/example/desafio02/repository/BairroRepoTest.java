@@ -46,10 +46,12 @@ public class BairroRepoTest {
 
     @Test
     void salvarBairro_returnTodos_quandoSucesso() {
-        List<Bairro> bairros = new ArrayList<>() {{
-            add(new Bairro(1, "Terra Firme", new BigDecimal(30)));
-            add(new Bairro(2, "Cremação", new BigDecimal(30)));
-        }};
+        List<Bairro> bairros = new ArrayList<>() {
+            {
+                add(new Bairro(1, "Terra Firme", new BigDecimal(30)));
+                add(new Bairro(2, "Cremação", new BigDecimal(30)));
+            }
+        };
 
         Optional<List<Bairro>> resultadoBairros = repo.salvarBairro(bairros);
 
@@ -80,6 +82,15 @@ public class BairroRepoTest {
     @Test
     void getBairroPeloId_throwsNotFoundException_quandoNaoEncontraId() {
         assertThrows(NotFoundException.class, () -> repo.getBairroPeloId(1));
+    }
+
+    @Test
+    void nomeJaCadastrado_throwsAlreadyExistingException_quandoJaEstaCadastrado() {
+        Bairro bairro = novoBairro();
+        List<Bairro> bairros = Arrays.asList(bairro);
+        repo.salvarBairro(bairros);
+
+        assertThrows(AlreadyExistingException.class, () -> repo.nomeJaCadastrado(bairro));
     }
 
 }
