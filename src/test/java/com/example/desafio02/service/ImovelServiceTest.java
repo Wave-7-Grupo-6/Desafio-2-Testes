@@ -67,6 +67,6 @@ class ImovelServiceTest {
 
         when(repo.getImovelPeloId(imovel.getId())).thenReturn(Optional.of(imovel));
 
-        assertThat(service.getMaiorComodo(imovel.getId())).isEqualTo("sala");
+        assertThat(service.getMaiorComodo(imovel.getId())).isEqualTo("Sala");
     }
 }

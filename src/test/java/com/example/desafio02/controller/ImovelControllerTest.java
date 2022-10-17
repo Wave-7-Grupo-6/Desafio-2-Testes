@@ -1,28 +1,28 @@
 package com.example.desafio02.controller;
 
-import com.example.desafio02.dto.BairroDTO;
-import com.example.desafio02.dto.ComodoDTO;
+import com.example.desafio02.exception.InvalidArgumentExceptionDetails;
 import com.example.desafio02.exception.NotFoundException;
 import com.example.desafio02.model.Bairro;
 import com.example.desafio02.model.Imovel;
-import com.example.desafio02.service.BairroService;
 import com.example.desafio02.service.ImovelService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.log4j.Log4j2;
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.Test;
+import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import static com.example.desafio02.utils.TestUtils.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.when;
@@ -30,6 +30,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @WebMvcTest(ImovelController.class)
 class ImovelControllerTest {
@@ -42,6 +43,35 @@ class ImovelControllerTest {
     @MockBean
     private ImovelService service;
 
+    @Test
+    void salvarImovel_returnImovel_quandoSucesso() throws Exception {
+        Imovel imovel = novoImovel();
+        imovel.setComodos(novaListaComodos());
+        BDDMockito.when(service.salvarImovel(any())).thenReturn(imovel);
+
+        ResultActions resposta = mockMvc.perform(post("/imoveis/salvar", imovel)
+                .content(mapper.writeValueAsString(imovel))
+                .contentType(MediaType.APPLICATION_JSON));
+
+        resposta.andExpect(status().isCreated())
+                .andExpect(jsonPath("$.nome", CoreMatchers.is(imovel.getNome())))
+                .andExpect(jsonPath("$.idBairro", CoreMatchers.is(imovel.getIdBairro())));
+    }
+
+    @Test
+    void salvarImovel_throwMethodArgumentNotValidException_quandoNomeComodoEhInvalido() throws Exception {
+        Imovel imovel = novoImovel();
+        imovel.setComodos(novaListaComodosNomeInvalido());
+        BDDMockito.when(service.salvarImovel(any())).thenReturn(imovel);
+
+        ResultActions resposta = mockMvc.perform(post("/imoveis/salvar", imovel)
+                .content(mapper.writeValueAsString(imovel))
+                .contentType(MediaType.APPLICATION_JSON));
+
+        resposta.andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.title", CoreMatchers.is("Parametros inválidos")));
+    }
+                
     @Test
     void salvarImovel_returnListaImovel_quandoSucesso() throws Exception {
         Imovel imovel = novoImovel();
