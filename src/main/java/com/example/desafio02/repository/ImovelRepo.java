@@ -68,9 +68,7 @@ public class ImovelRepo {
     public boolean idJaCadastrado(Imovel novoImovel) {
         List<Imovel> imoveis = new ArrayList<>(getTodos());
 
-        for (Imovel imovel : imoveis) {
-            if(imovel.getId() == novoImovel.getId()) throw new AlreadyExistingException("Imovel já cadastrado");
-        }
+        if(idJaCadastrado(novoImovel.getId())) throw new AlreadyExistingException("Imóvel já cadastrado");
 
         return false;
     }
@@ -80,6 +78,16 @@ public class ImovelRepo {
 
         for(Imovel imovel : imoveis){
             if(imovel.getNome().equals(novoImovel.getNome())) throw new AlreadyExistingException("Imovel já cadastrado");
+        }
+
+        return false;
+    }
+
+    public boolean idJaCadastrado(int id){
+        List<Imovel> imoveis = new ArrayList<>(getTodos());
+
+        for(Imovel imovel : imoveis){
+            if(imovel.getId() == id) return true;
         }
 
         return false;
